@@ -10,8 +10,8 @@ export default function LanguageSwitcher() {
   const currentLocale = (params?.locale as Locale) || 'en';
   const otherLocale: Locale = currentLocale === 'en' ? 'fa' : 'en';
 
-  // Replace the locale in the pathname
-  const newPath = pathname?.replace(`/${currentLocale}`, `/${otherLocale}`) || `/${otherLocale}`;
+  // Replace the locale in the pathname, preserving basePath
+  const newPath = pathname?.replace(`/${currentLocale}`, `/${otherLocale}`) || `/jome-farmer/${otherLocale}`;
 
   return (
     <Link

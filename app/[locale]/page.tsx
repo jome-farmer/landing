@@ -5,6 +5,11 @@ import Features from '@/components/Features';
 import HowItWorks from '@/components/HowItWorks';
 import CTA from '@/components/CTA';
 import Footer from '@/components/Footer';
+import { type Locale } from '@/lib/translations';
+
+export function generateStaticParams() {
+  return [{ locale: 'en' }, { locale: 'fa' }];
+}
 
 export default function HomePage() {
   return (
