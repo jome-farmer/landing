@@ -3,7 +3,13 @@ import Script from "next/script";
 import { Hanken_Grotesk, Vazirmatn } from "next/font/google";
 import "../globals.css";
 import StoreProvider from "@/lib/store-provider";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import { type Locale } from "@/lib/translations";
+
+export function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "fa" }];
+}
 
 const hankenGrotesk = Hanken_Grotesk({
   weight: ["400", "600", "700"],
@@ -53,7 +59,13 @@ export default async function LocaleLayout({
             : "var(--font-hanken-grotesk), sans-serif",
         }}
       >
-        <StoreProvider>{children}</StoreProvider>
+        <StoreProvider>
+          <div className="relative flex min-h-screen w-full flex-col">
+            <Header />
+            <main className="flex flex-1 w-full flex-col items-center">{children}</main>
+            <Footer />
+          </div>
+        </StoreProvider>
       </body>
     </html>
   );

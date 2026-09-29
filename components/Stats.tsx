@@ -17,7 +17,7 @@ export default function Stats() {
         {stats.map((stat) => (
           <div
             key={stat.label}
-            className="flex flex-col gap-4 rounded-xl border border-outline bg-surface p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]"
+            className="flex flex-col gap-4 rounded-xl border border-outline bg-surface p-6 sheen"
           >
             <div className="flex items-center justify-between">
               <p className="text-xs font-bold uppercase tracking-[0.6px] text-muted">{stat.label}</p>

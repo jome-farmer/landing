@@ -11,11 +11,55 @@
   --color-muted: #c5c8bb;
   --color-subtle: #8f9287;
   --color-info: #749cb2;
+  --color-deep: #0d0f0c;
+  --color-raised: #1a1c19;
+  --color-chip: #333532;
+  --color-outline-variant: #45483e;
+  --color-soil: #3d2b1f;
+  --color-clay: #fcb792;
+  --color-rust: #e9a682;
+  --color-rust-deep: #6a3a1e;
+  --color-danger: #ffb4ab;
 
   --radius-default: 0.25rem;
   --radius-lg: 0.5rem;
   --radius-xl: 0.75rem;
   --radius-full: 9999px;
+}
+
+/* Subtle top highlight used on raised cards */
+@utility sheen {
+  box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.1);
+}
+
+/* Soil-coloured range slider (What-If simulator) */
+.range-soil {
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--color-soil);
+  cursor: pointer;
+}
+.range-soil::-webkit-slider-thumb {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  background: var(--color-accent);
+  box-shadow: 0 0 0 4px var(--color-background);
+}
+.range-soil::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 12px;
+  background: var(--color-accent);
+  box-shadow: 0 0 0 4px var(--color-background);
+}
+.range-soil:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 6px;
 }
 
 /* Custom scrollbar */
