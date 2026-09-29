@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JoME — AI Agronomist · v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header id="nav"></header>
+
+<header class="hero">
+  <div class="wrap hero-split">
+    <div style="display:flex;flex-direction:column;gap:32px">
+      <p class="label">Intelligence layer</p>
+      <h1>Meet your digital <em>agronomist.</em></h1>
+      <p class="lead" style="max-width:560px">JoME is an AI-powered copilot for modern farming, bridging the critical gap between raw field sensor data and expert, timely decisions. High-reliability technology for the field.</p>
+      <div class="actions">
+        <a href="chat.html" class="btn btn-solid">Start a conversation</a>
+        <a href="chat.html" class="link">See demo <span class="arrow">↗</span></a>
+      </div>
+    </div>
+
+    <aside class="panel" aria-label="Live system status">
+      <div class="panel-head">
+        <div><p class="label">System status</p><p style="margin-top:6px" class="status"><span class="dot"></span>All nodes active</p></div>
+        <span class="label">Live</span>
+      </div>
+      <div class="kv" style="margin-bottom:14px"><span class="muted">Soil moisture target</span><span class="num-md" style="color:var(--sage)">82%</span></div>
+      <div class="meter sage"><i style="width:82%"></i></div>
+      <p class="serif" style="font-size:22px;line-height:30px;margin-top:28px">“Current moisture levels are optimal. I recommend holding irrigation until tomorrow evening.”</p>
+      <p class="label" style="margin-top:12px">— JoME AI</p>
+    </aside>
+  </div>
+</header>
+
+<section class="section rule-top">
+  <div class="wrap" style="display:flex;flex-direction:column;gap:64px">
+    <div class="head center">
+      <p class="label">01 — Dirt to data</p>
+      <h2>Intelligent precision, without the fragility.</h2>
+      <p class="lead">We build tools that feel as rugged and reliable as the hardware you deploy in the field.</p>
+    </div>
+
+    <div class="cells">
+      <article class="cell span-8">
+        <div class="cell-body">
+          <p class="label">Plant Doctor</p>
+          <h3 class="h3">Diagnose crop disease directly from the field.</h3>
+          <p class="muted">Advanced computer vision gives probabilistic confidence scores and recommended immediate actions before issues spread.</p>
+        </div>
+        <div class="cell-foot panel-sunken" style="display:flex;align-items:center;gap:24px;max-width:560px">
+          <div class="ring">
+            <svg width="72" height="72" viewBox="0 0 72 72"><circle cx="36" cy="36" r="32" fill="none" stroke="var(--hairline-strong)" stroke-width="2"/><circle cx="36" cy="36" r="32" fill="none" stroke="var(--sage)" stroke-width="2" stroke-dasharray="185 201"/></svg>
+            <span>92%</span>
+          </div>
+          <div><p class="meta sage">Reasoning</p><p style="margin-top:6px">High probability of Early Blight detected on lower canopy leaves.</p></div>
+        </div>
+      </article>
+
+      <article class="cell span-4">
+        <div class="cell-body">
+          <p class="label">What-if simulations</p>
+          <h3 class="h3">See the cost of waiting.</h3>
+          <p class="muted">Simulate irrigation impacts before spending resources. See the projected ROI of delaying a cycle based on hyper-local forecasts.</p>
+        </div>
+        <div class="cell-foot panel-sunken" style="display:flex;flex-direction:column;gap:16px">
+          <div class="kv"><span class="meta">Delay cycle</span><span class="meta sage">+24 hrs</span></div>
+          <div class="meter sage"><i style="width:33%"></i></div>
+          <div class="kv" style="padding-top:12px;border-top:1px solid var(--hairline)"><span class="meta">Water saved</span><span class="num-sm" style="color:var(--clay)">1.2M gal</span></div>
+        </div>
+      </article>
+
+      <article class="cell span-12" style="display:grid;gap:40px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));align-items:start">
+        <div class="cell-body">
+          <p class="label">24/7 expert advice</p>
+          <h3 class="h3">Ask in plain language. Get field-ready answers.</h3>
+          <p class="muted">JoME understands complex soil chemistry, historical weather impacts, and specific crop needs to provide actionable, context-aware advice at any hour.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px"><span class="tag">Soil chem</span><span class="tag">Weather</span><span class="tag">Crop needs</span></div>
+        </div>
+        <div class="thread" style="gap:16px">
+          <div class="msg me"><div class="avatar">Y</div><div class="bubble"><p>Given the forecasted rain on Thursday, should I apply nitrogen today?</p></div></div>
+          <div class="msg"><div class="avatar serif">J</div><div class="bubble"><p>I recommend waiting. With an 85% chance of heavy rain Thursday, applying nitrogen today risks significant runoff, wasting resources and potentially impacting local water systems.</p></div></div>
+          <a href="chat.html" class="composer"><span style="flex:1">Ask JoME a question…</span><span class="send">→</span></a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <p class="label">Begin</p>
+    <h2>Ready for intelligent stewardship?</h2>
+    <p class="lead" style="max-width:560px;margin:-16px auto 40px">Stop guessing and start optimizing. JoME is ready to help you manage your land with precision and confidence.</p>
+    <div class="actions"><a href="chat.html" class="btn btn-solid">Start a conversation</a></div>
+  </div>
+</section>
+
+<footer id="footer"></footer>
+<script src="partials.js"></script>
+</body>
+</html>

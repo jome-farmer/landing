@@ -2,108 +2,140 @@
 
 import { useTranslations } from '@/lib/use-translations';
 
-type Feature = { icon: string; w: number; h: number; title: string; body?: string };
+type Spec = { title: string; body?: string };
 
-function Showcase({
+function Feature({
+  label,
   title,
   description,
-  features,
+  specs,
   image,
-  imageClass,
-  reverse = false,
+  imageAlt,
+  caption,
+  flip = false,
+  imageStyle,
 }: {
+  label: string;
   title: string;
   description: string;
-  features: Feature[];
+  specs: Spec[];
   image: string;
-  imageClass: string;
-  reverse?: boolean;
+  imageAlt: string;
+  caption: string;
+  flip?: boolean;
+  imageStyle?: React.CSSProperties;
 }) {
   return (
-    <section className="relative w-full overflow-hidden rounded-xl border border-outline bg-surface p-6 md:p-20">
-      <div className="absolute inset-0 bg-[linear-gradient(155deg,rgb(255_255_255/0.02),transparent)]" />
-      <div className="relative grid items-center gap-6 md:grid-cols-12">
-        <div className={`flex flex-col gap-3 md:col-span-5 ${reverse ? 'md:order-2 md:col-start-8' : ''}`}>
-          <h2 className="text-[32px] leading-10 font-semibold">{title}</h2>
-          <p className="text-muted">{description}</p>
-          <ul className="flex flex-col gap-4 pt-4">
-            {features.map((f) => (
-              <li key={f.title} className="flex items-start gap-3">
-                <img src={`/images/hardware/${f.icon}`} alt="" width={f.w} height={f.h} className="mt-0.5 shrink-0" />
-                <div>
-                  <p className={f.body ? 'font-bold' : ''}>{f.title}</p>
-                  {f.body && <p className="text-muted">{f.body}</p>}
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className={`h-[260px] overflow-hidden rounded-lg bg-background md:h-[400px] ${reverse ? 'md:col-span-7 md:col-start-1' : 'md:col-span-7'}`}>
-          <img src={`/images/hardware/${image}`} alt="" className={`size-full object-cover ${imageClass}`} />
-        </div>
+    <article className={`feature${flip ? ' flip' : ''}`}>
+      <figure className="media">
+        <img src={`/images/hardware/${image}`} alt={imageAlt} style={imageStyle} />
+        <figcaption className="label">{caption}</figcaption>
+      </figure>
+      <div className="copy">
+        <p className="label">{label}</p>
+        <h3 className="h2">{title}</h3>
+        <p className="muted">{description}</p>
+        <ul className="specs">
+          {specs.map((spec, i) => (
+            <li key={spec.title}>
+              <span className="idx">{'AB'[i]}</span>
+              <b>{spec.title}</b>
+              {spec.body && <p>{spec.body}</p>}
+            </li>
+          ))}
+        </ul>
       </div>
-    </section>
+    </article>
   );
 }
 
 export default function HardwarePage() {
-  const t = useTranslations().hardwarePage;
+  const { hardware: t, common } = useTranslations();
 
   return (
-    <div className="flex w-full max-w-[1280px] flex-col gap-24 px-6 pt-20 pb-44">
-      <section className="grid items-center gap-6 py-4 md:grid-cols-12">
-        <div className="flex flex-col items-start gap-6 md:col-span-6">
-          <h1 className="text-4xl md:text-[56px] leading-tight md:leading-[64px] font-bold tracking-[-1.12px]">{t.title}</h1>
-          <p className="max-w-[576px] text-lg leading-7 text-muted">{t.subtitle}</p>
-          <div className="flex flex-wrap gap-4 pt-4">
-            <a href="#hub" className="bg-accent px-8 py-3 text-xs font-bold tracking-[0.96px] text-background hover:bg-primary transition-colors">
-              {t.explore}
-            </a>
-            <a href="#hub" className="border border-info px-8 py-3 text-xs font-bold tracking-[0.96px] hover:bg-info/10 transition-colors">
-              {t.specs}
-            </a>
+    <>
+      <header className="hero">
+        <div className="wrap">
+          <p className="label" style={{ marginBottom: 32 }}>{t.label}</p>
+          <div className="hero-grid">
+            <h1>
+              {t.title} <em>{t.titleEm}</em>
+            </h1>
+            <div className="hero-side">
+              <p className="lead">{t.subtitle}</p>
+              <div className="actions">
+                <a href="#ecosystem" className="btn btn-solid">{t.explore}</a>
+                <a href="#ecosystem" className="link">{t.specs} ↓</a>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="h-[360px] overflow-hidden rounded-lg border border-outline md:col-span-6 md:h-[600px]">
-          <img src="/images/hardware/hub.jpg" alt="" className="size-full object-cover" />
+      </header>
+
+      <figure className="plate wrap">
+        <img src="/images/hardware/hub.jpg" alt={t.imageAlt} style={{ objectPosition: 'center 60%' }} />
+        <figcaption>
+          <span className="label">{t.caption}</span>
+          <span className="label">{t.captionEnd}</span>
+        </figcaption>
+      </figure>
+
+      <section className="section" id="ecosystem" style={{ paddingBottom: 0, scrollMarginTop: 72 }}>
+        <div className="wrap">
+          <div className="head" style={{ marginBottom: 72 }}>
+            <p className="label">{t.ecosystem.label}</p>
+            <h2>{t.ecosystem.title}</h2>
+          </div>
+
+          <Feature
+            label={t.hub.label}
+            title={t.hub.title}
+            description={t.hub.description}
+            specs={[
+              { title: t.hub.dosing, body: t.hub.dosingBody },
+              { title: t.hub.flow, body: t.hub.flowBody },
+            ]}
+            image="pole.jpg"
+            imageAlt={t.hub.imageAlt}
+            caption={t.hub.caption}
+            imageStyle={{ filter: 'grayscale(.6)' }}
+          />
+          <Feature
+            flip
+            label={t.injection.label}
+            title={t.injection.title}
+            description={t.injection.description}
+            specs={[{ title: t.injection.dosing }, { title: t.injection.pump }]}
+            image="tank.jpg"
+            imageAlt={t.injection.imageAlt}
+            caption={t.injection.caption}
+          />
+          <Feature
+            label={t.subsurface.label}
+            title={t.subsurface.title}
+            description={t.subsurface.description}
+            specs={[{ title: t.subsurface.sensing }, { title: t.subsurface.delivery }]}
+            image="schematic.jpg"
+            imageAlt={t.subsurface.imageAlt}
+            caption={t.subsurface.caption}
+          />
         </div>
       </section>
 
-      <div id="hub" className="scroll-mt-24">
-        <Showcase
-          title={t.hub.title}
-          description={t.hub.description}
-          features={[
-            { icon: 'dosing.svg', w: 18, h: 18, title: t.hub.dosing, body: t.hub.dosingBody },
-            { icon: 'flow.svg', w: 20, h: 16, title: t.hub.flow, body: t.hub.flowBody },
-          ]}
-          image="pole.jpg"
-          imageClass="opacity-80 mix-blend-luminosity"
-        />
-      </div>
-
-      <Showcase
-        reverse
-        title={t.injection.title}
-        description={t.injection.description}
-        features={[
-          { icon: 'mineral.svg', w: 18.03, h: 18.51, title: t.injection.dosing },
-          { icon: 'pump.svg', w: 16, h: 19, title: t.injection.pump },
-        ]}
-        image="tank.jpg"
-        imageClass="opacity-80"
-      />
-
-      <Showcase
-        title={t.subsurface.title}
-        description={t.subsurface.description}
-        features={[
-          { icon: 'sensing.svg', w: 20, h: 14.15, title: t.subsurface.sensing },
-          { icon: 'drop.svg', w: 17, h: 16.99, title: t.subsurface.delivery },
-        ]}
-        image="schematic.jpg"
-        imageClass="opacity-90"
-      />
-    </div>
+      <section className="cta">
+        <div className="wrap">
+          <p className="label">{common.begin}</p>
+          <h2>
+            {t.cta.title} <em style={{ color: 'var(--sage)' }}>{t.cta.titleEm}</em>
+          </h2>
+          <div className="actions">
+            <a href="#" className="btn btn-solid">{common.getStarted}</a>
+            <a href="#" className="link">
+              {common.requestQuote} <span className="arrow">→</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

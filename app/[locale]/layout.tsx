@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Script from "next/script";
-import { Hanken_Grotesk, Vazirmatn } from "next/font/google";
+import type { CSSProperties } from "react";
+import { Instrument_Serif, Inter, Vazirmatn } from "next/font/google";
 import "../globals.css";
 import StoreProvider from "@/lib/store-provider";
 import Header from "@/components/Header";
@@ -11,14 +11,21 @@ export function generateStaticParams() {
   return [{ locale: "en" }, { locale: "fa" }];
 }
 
-const hankenGrotesk = Hanken_Grotesk({
-  weight: ["400", "600", "700"],
+const instrumentSerif = Instrument_Serif({
+  weight: "400",
+  style: ["normal", "italic"],
   subsets: ["latin"],
-  variable: "--font-hanken-grotesk",
+  variable: "--font-instrument-serif",
+});
+
+const inter = Inter({
+  weight: ["400", "500"],
+  subsets: ["latin"],
+  variable: "--font-inter",
 });
 
 const vazirmatn = Vazirmatn({
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500"],
   subsets: ["arabic", "latin"],
   variable: "--font-vazirmatn",
 });
@@ -39,30 +46,19 @@ export default async function LocaleLayout({
   const localeTyped = locale as Locale;
   const isRTL = localeTyped === "fa";
 
+  // Persian has no serif pairing here, so both roles use Vazirmatn
+  const fonts = {
+    "--serif": isRTL ? "var(--font-vazirmatn), serif" : "var(--font-instrument-serif), Georgia, serif",
+    "--sans": isRTL ? "var(--font-vazirmatn), sans-serif" : "var(--font-inter), system-ui, sans-serif",
+  } as CSSProperties;
+
   return (
-    <html lang={localeTyped} dir={isRTL ? "rtl" : "ltr"} className="dark">
-      <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-          rel="stylesheet"
-        />
-      </head>
-      <body
-        className={`${
-          isRTL
-            ? vazirmatn.variable
-            : hankenGrotesk.variable
-        } antialiased`}
-        style={{
-          fontFamily: isRTL
-            ? "var(--font-vazirmatn), sans-serif"
-            : "var(--font-hanken-grotesk), sans-serif",
-        }}
-      >
+    <html lang={localeTyped} dir={isRTL ? "rtl" : "ltr"}>
+      <body className={isRTL ? vazirmatn.variable : `${instrumentSerif.variable} ${inter.variable}`} style={fonts}>
         <StoreProvider>
-          <div className="relative flex min-h-screen w-full flex-col">
+          <div className="flex min-h-screen flex-col">
             <Header />
-            <main className="flex flex-1 w-full flex-col items-center">{children}</main>
+            <main className="flex-1">{children}</main>
             <Footer />
           </div>
         </StoreProvider>
