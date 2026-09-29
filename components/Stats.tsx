@@ -1,57 +1,34 @@
 'use client';
 
 import { useTranslations } from '@/lib/use-translations';
-import Icon from './Icon';
 
 export default function Stats() {
   const t = useTranslations();
 
   const stats = [
-    {
-      label: t.stats.waterSaved,
-      value: '30%',
-      icon: 'water_drop',
-      progress: 30,
-    },
-    {
-      label: t.stats.yieldIncrease,
-      value: '25%',
-      icon: 'trending_up',
-      progress: 25,
-    },
-    {
-      label: t.stats.farmsConnected,
-      value: '500+',
-      icon: 'hub',
-      progress: 75,
-    },
+    { label: t.stats.waterSaved, value: '30%', icon: 'icon-water.svg', w: 16, h: 20, progress: 30, color: 'text-primary', bar: 'bg-primary' },
+    { label: t.stats.yieldIncrease, value: '25%', icon: 'icon-trend.svg', w: 20, h: 12, progress: 25, color: 'text-accent', bar: 'bg-accent' },
+    { label: t.stats.farmsConnected, value: '500+', icon: 'icon-hub.svg', w: 24, h: 23, progress: 80, color: 'text-on-surface', bar: 'bg-subtle' },
   ];
 
   return (
-    <section className="w-full flex justify-center py-5 px-4 md:px-10">
-      <div className="max-w-[1280px] w-full">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
-          {stats.map((stat, index) => (
-            <div
-              key={index}
-              className="flex flex-1 flex-col gap-2 rounded-xl p-8 border border-[#3b5443] bg-surface-dark hover:border-primary/50 transition-colors group"
-            >
-              <div className="flex justify-between items-start">
-                <p className="text-[#9db9a6] text-base font-medium leading-normal group-hover:text-primary transition-colors">
-                  {stat.label}
-                </p>
-                <Icon
-                  name={stat.icon}
-                  className="text-[#3b5443] group-hover:text-primary transition-colors"
-                />
-              </div>
-              <p className="text-white tracking-light text-4xl font-bold leading-tight">{stat.value}</p>
-              <div className="w-full h-1 bg-[#28392e] rounded-full mt-2 overflow-hidden">
-                <div className="h-full bg-primary" style={{ width: `${stat.progress}%` }}></div>
-              </div>
+    <section className="relative z-10 -mt-12 mb-2 w-full max-w-[1280px] px-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {stats.map((stat) => (
+          <div
+            key={stat.label}
+            className="flex flex-col gap-4 rounded-xl border border-outline bg-surface p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]"
+          >
+            <div className="flex items-center justify-between">
+              <p className="text-xs font-bold uppercase tracking-[0.6px] text-muted">{stat.label}</p>
+              <img src={`/images/${stat.icon}`} alt="" width={stat.w} height={stat.h} />
             </div>
-          ))}
-        </div>
+            <p className={`text-[28px] leading-8 font-bold tracking-[-0.28px] ${stat.color}`}>{stat.value}</p>
+            <div className="h-2 w-full overflow-hidden rounded-full bg-surface-variant">
+              <div className={`h-full rounded-full ${stat.bar}`} style={{ width: `${stat.progress}%` }} />
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );

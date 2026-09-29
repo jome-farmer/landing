@@ -1,21 +1,14 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Noto_Sans, Space_Grotesk } from "next/font/google";
-import { Vazirmatn } from "next/font/google";
+import { Hanken_Grotesk, Vazirmatn } from "next/font/google";
 import "../globals.css";
 import StoreProvider from "@/lib/store-provider";
 import { type Locale } from "@/lib/translations";
 
-const notoSans = Noto_Sans({
-  weight: ["400", "500", "700"],
+const hankenGrotesk = Hanken_Grotesk({
+  weight: ["400", "600", "700"],
   subsets: ["latin"],
-  variable: "--font-noto-sans",
-});
-
-const spaceGrotesk = Space_Grotesk({
-  weight: ["300", "400", "500", "600", "700"],
-  subsets: ["latin"],
-  variable: "--font-space-grotesk",
+  variable: "--font-hanken-grotesk",
 });
 
 const vazirmatn = Vazirmatn({
@@ -52,12 +45,12 @@ export default async function LocaleLayout({
         className={`${
           isRTL
             ? vazirmatn.variable
-            : `${notoSans.variable} ${spaceGrotesk.variable}`
+            : hankenGrotesk.variable
         } antialiased`}
         style={{
           fontFamily: isRTL
             ? "var(--font-vazirmatn), sans-serif"
-            : "var(--font-space-grotesk), var(--font-noto-sans), sans-serif",
+            : "var(--font-hanken-grotesk), sans-serif",
         }}
       >
         <StoreProvider>{children}</StoreProvider>

@@ -8,53 +8,38 @@ import Icon from './Icon';
 export default function Header() {
   const t = useTranslations();
 
+  const links = [
+    { href: '#features', label: t.nav.tech },
+    { href: '#', label: t.nav.aiAgent },
+    { href: '#', label: t.nav.nutrients },
+    { href: '#', label: t.nav.hardware },
+  ];
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-solid border-[#28392e] bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md">
-      <div className="layout-container flex justify-center w-full">
-        <div className="flex max-w-[1280px] w-full items-center justify-between px-4 py-3 md:px-10">
-          <div className="flex items-center gap-4 text-[#111813] dark:text-white">
-            <div className="size-8 flex items-center justify-center text-primary">
-              <Icon name="eco" className="text-3xl" />
-            </div>
-            <h2 className="text-lg font-bold leading-tight tracking-[-0.015em]">JoME</h2>
-          </div>
-          <div className="hidden md:flex flex-1 justify-end gap-8">
-            <div className="flex items-center gap-9">
-              <Link
-                className="text-sm font-medium leading-normal hover:text-primary transition-colors"
-                href="#features"
-              >
-                {t.nav.features}
-              </Link>
-              <Link
-                className="text-sm font-medium leading-normal hover:text-primary transition-colors"
-                href="#technology"
-              >
-                {t.nav.technology}
-              </Link>
-              <Link
-                className="text-sm font-medium leading-normal hover:text-primary transition-colors"
-                href="#how-it-works"
-              >
-                {t.nav.howItWorks}
-              </Link>
-              <Link
-                className="text-sm font-medium leading-normal hover:text-primary transition-colors"
-                href="#"
-              >
-                {t.nav.login}
-              </Link>
-            </div>
-            <div className="flex items-center gap-4">
-              <LanguageSwitcher />
-              <button className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-6 bg-primary text-background-dark text-sm font-bold leading-normal tracking-[0.015em] hover:bg-opacity-90 transition-all shadow-[0_0_15px_rgba(19,236,91,0.3)]">
-                <span className="truncate">{t.nav.getStarted}</span>
-              </button>
-            </div>
-          </div>
-          <div className="md:hidden text-white">
-            <Icon name="menu" />
-          </div>
+    <header className="sticky top-0 z-50 w-full bg-background">
+      <div className="mx-auto flex h-20 max-w-[1280px] items-center justify-between px-6">
+        <Link href="#" className="flex items-center gap-2">
+          <img src="/images/logo.svg" alt="" width={17} height={17} />
+          <span className="text-4xl leading-[44px] font-bold tracking-[-1.8px] text-primary">JoME</span>
+        </Link>
+        <nav className="hidden md:flex items-center gap-8">
+          {links.map((link) => (
+            <Link key={link.label} href={link.href} className="text-base text-muted hover:text-primary transition-colors">
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+        <div className="hidden md:flex items-center gap-4">
+          <LanguageSwitcher />
+          <button className="cursor-pointer rounded border border-info px-6 py-2 text-base text-accent hover:bg-info/10 transition-colors">
+            {t.nav.requestQuote}
+          </button>
+          <button className="cursor-pointer rounded bg-accent px-6 py-2 text-base font-bold text-background hover:bg-primary transition-colors">
+            {t.nav.getStarted}
+          </button>
+        </div>
+        <div className="md:hidden text-on-surface">
+          <Icon name="menu" />
         </div>
       </div>
     </header>
