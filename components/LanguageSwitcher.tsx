@@ -16,9 +16,9 @@ export default function LanguageSwitcher() {
   return (
     <Link
       href={newPath}
-      className="text-sm font-medium leading-normal hover:text-primary transition-colors px-2 py-1 rounded"
+      className="lang"
     >
-      {otherLocale.toUpperCase()}
+      {otherLocale === 'fa' ? 'فارسی' : 'English'}
     </Link>
   );
 }

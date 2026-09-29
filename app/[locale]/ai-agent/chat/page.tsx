@@ -1,186 +1,157 @@
 'use client';
 
 import { useState } from 'react';
-import { useTranslations } from '@/lib/use-translations';
+import Link from 'next/link';
+import { useLocale, useTranslations } from '@/lib/use-translations';
 
-const bot = 'rounded-2xl rounded-ss-sm border bg-background/50 p-4';
-const user = 'rounded-2xl rounded-se-sm border border-accent/50 bg-accent/20 p-4';
-
-function Avatar({ icon, w, h, ring = 'border-outline' }: { icon: string; w: number; h: number; ring?: string }) {
+function UserAvatar() {
   return (
-    <span className={`mt-1 flex size-8 shrink-0 items-center justify-center rounded-full border bg-background ${ring}`}>
-      <img src={`/images/chat/${icon}`} alt="" width={w} height={h} />
-    </span>
+    <div className="avatar">
+      <img src="/images/chat/avatar.jpg" alt="" />
+    </div>
   );
 }
 
-function UserAvatar() {
-  return <img src="/images/chat/avatar.jpg" alt="" className="mt-1 size-8 shrink-0 rounded-full border border-outline object-cover" />;
-}
-
 export default function ChatPage() {
-  const t = useTranslations().chatPage;
+  const t = useTranslations().chat;
+  const locale = useLocale();
   const [hours, setHours] = useState(24);
-  // ponytail: linear stand-in (24h → -12%), swap for the real simulator API when it exists
+  // ponytail: linear stand-in (24h → −12%), swap for the real simulator API when it exists
   const risk = Math.round(hours / 2);
 
   return (
-    <div className="w-full max-w-[1024px] p-4 md:p-6">
-      <section className="overflow-hidden rounded-xl border border-outline bg-surface shadow-[inset_0_1px_0_1px_rgb(255_255_255/0.05)]">
-        <header className="flex items-center justify-between border-b border-outline bg-raised/50 px-6 py-4">
-          <div className="flex items-center gap-3">
-            <span className="relative flex size-10 items-center justify-center rounded-full border border-outline bg-background">
-              <img src="/images/chat/copilot.svg" alt="" width={18} height={16} />
-              <span className="absolute bottom-0 end-0 size-3 rounded-full border-2 border-surface bg-accent" />
-            </span>
+    <div className="wrap" style={{ maxWidth: 1072 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 24, padding: '64px 0 32px', borderBottom: '1px solid var(--hairline)' }}>
+        <div>
+          <Link href={`/${locale}/ai-agent/`} className="label" style={{ display: 'inline-block', marginBottom: 16 }}>
+            <span className="arrow">←</span> {t.back}
+          </Link>
+          <h1 className="serif" style={{ fontSize: 'clamp(44px, 5vw, 64px)', lineHeight: 1.1, letterSpacing: '-.02em' }}>
+            {t.title} <em style={{ color: 'var(--sage)' }}>{t.titleEm}</em>
+          </h1>
+        </div>
+        <p className="status muted" style={{ fontSize: 14 }}>
+          <span className="dot" />
+          {t.status}
+        </p>
+      </div>
+
+      <div className="thread" style={{ padding: '40px 0 16px' }}>
+        <div className="msg">
+          <div className="avatar">!</div>
+          <div className="bubble alert">
+            <p className="meta alert">{t.alert.meta}</p>
+            <p style={{ fontWeight: 500 }}>{t.alert.title}</p>
+            <p className="muted" style={{ fontSize: 14 }}>{t.alert.body}</p>
+            <div className="actions" style={{ gap: 12, marginTop: 8 }}>
+              <button className="btn btn-ghost btn-sm">{t.alert.viewMap}</button>
+              <button className="btn btn-sm muted">{t.alert.acknowledge}</button>
+            </div>
+          </div>
+        </div>
+
+        <div className="msg">
+          <div className="avatar">J</div>
+          <div className="bubble insight">
+            <p className="meta sage">{t.insight.meta}</p>
+            <p style={{ fontWeight: 500 }}>{t.insight.title}</p>
+            <p className="muted" style={{ fontSize: 14 }}>{t.insight.body}</p>
+          </div>
+        </div>
+
+        <div className="msg me">
+          <UserAvatar />
+          <div className="bubble">
+            <p>{t.userScan}</p>
+            <img src="/images/chat/leaf-scan.jpg" alt={t.scanAlt} style={{ width: 220, aspectRatio: '3 / 2', objectFit: 'cover', border: '1px solid var(--hairline)' }} />
+          </div>
+        </div>
+
+        <div className="msg">
+          <div className="avatar">J</div>
+          <div className="bubble" style={{ padding: 24 }}>
+            <p className="meta">{t.diagnosis.label}</p>
+            <div style={{ display: 'grid', gap: 28, gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', marginTop: 12 }}>
+              <div className="scan">
+                <img src="/images/chat/leaf-scan.jpg" alt="" />
+                <i /><i /><i /><i />
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: 24 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                  <span className="tag alert" style={{ alignSelf: 'flex-start' }}>{t.diagnosis.badge}</span>
+                  <h2 className="h3">{t.diagnosis.title}</h2>
+                  <div className="kv">
+                    <span className="meta">{t.diagnosis.confidence}</span>
+                    <span className="num-sm" dir="ltr" style={{ color: 'var(--sage)' }}>89%</span>
+                  </div>
+                  <div className="meter sage"><i style={{ width: '89%' }} /></div>
+                </div>
+                <div className="panel-sunken">
+                  <p className="meta sky">{t.diagnosis.protocol}</p>
+                  <p style={{ marginTop: 8, fontSize: 14 }}>{t.diagnosis.protocolBody}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="msg">
+          <div className="avatar">J</div>
+          <div className="bubble"><p>{t.morning}</p></div>
+        </div>
+
+        <div className="msg me">
+          <UserAvatar />
+          <div className="bubble"><p>{t.userSimulation}</p></div>
+        </div>
+
+        <div className="msg">
+          <div className="avatar">J</div>
+          <div className="bubble" style={{ padding: 28, gap: 24 }}>
+            <p className="meta">{t.simulation.label}</p>
+            <div style={{ textAlign: 'center' }}>
+              <p className="muted">{t.simulation.heading}</p>
+              <p style={{ marginTop: 6 }}>
+                <span className="num">{hours}</span>{' '}
+                <span className="serif" style={{ fontSize: 28, color: 'var(--text-2)', marginInlineStart: 6 }}>{t.simulation.unit}</span>
+              </p>
+            </div>
             <div>
-              <h1 className="text-2xl leading-8 font-semibold">{t.title}</h1>
-              <p className="text-sm text-muted">{t.status}</p>
-            </div>
-          </div>
-          <button aria-label="More" className="cursor-pointer rounded-full p-2 hover:bg-outline/40">
-            <img src="/images/chat/more.svg" alt="" width={10.5} height={10.5} />
-          </button>
-        </header>
-
-        <div className="flex flex-col gap-8 bg-background/20 p-4 md:p-6">
-          <div className="flex max-w-[877px] gap-4">
-            <Avatar icon="alert.svg" w={10.81} h={9.33} ring="border-danger/50" />
-            <div className={`${bot} flex-1 border-danger/30`}>
-              <p className="text-xs font-bold tracking-[0.96px] text-danger">{t.alert.meta}</p>
-              <p className="pt-1 font-semibold">{t.alert.title}</p>
-              <p className="text-sm text-muted">{t.alert.body}</p>
-              <div className="flex flex-wrap gap-2 pt-3">
-                <button className="cursor-pointer rounded-full border border-danger/50 px-4 py-1.5 text-sm text-danger hover:bg-danger/10">{t.alert.viewMap}</button>
-                <button className="cursor-pointer rounded-full bg-chip px-4 py-1.5 text-sm text-muted hover:text-on-surface">{t.alert.acknowledge}</button>
+              <input
+                className="range"
+                type="range"
+                min={0}
+                max={72}
+                value={hours}
+                onChange={(e) => setHours(Number(e.target.value))}
+                aria-label={t.simulation.heading}
+              />
+              <div className="kv" style={{ marginTop: 12 }}>
+                <span className="meta">{t.simulation.min}</span>
+                <span className="meta">{t.simulation.max}</span>
               </div>
             </div>
-          </div>
-
-          <div className="flex max-w-[877px] gap-4">
-            <Avatar icon="insight.svg" w={11.26} h={10.77} ring="border-accent/50" />
-            <div className={`${bot} flex-1 border-accent/30`}>
-              <p className="text-xs font-bold tracking-[0.96px] text-accent">{t.insight.meta}</p>
-              <p className="pt-1 font-semibold">{t.insight.title}</p>
-              <p className="text-sm text-muted">{t.insight.body}</p>
-            </div>
-          </div>
-
-          <div className="flex justify-end gap-4 pt-4">
-            <div className={`${user} flex flex-col gap-3`}>
-              <p>{t.userScan}</p>
-              <img src="/images/chat/leaf-scan.jpg" alt="" className="h-32 w-48 rounded-lg border border-outline object-cover" />
-            </div>
-            <UserAvatar />
-          </div>
-
-          <div className="flex max-w-[925px] gap-4">
-            <Avatar icon="bot.svg" w={10.5} h={9.33} />
-            <div className={`${bot} flex flex-1 flex-col gap-4 border-outline p-5 shadow-lg`}>
-              <p className="flex items-center gap-2 text-xs font-bold tracking-[0.96px] text-muted">
-                <img src="/images/chat/diag.svg" alt="" width={9.92} height={9.92} />
-                {t.diagnosis.label}
+            <div className="panel-sunken" style={{ textAlign: 'center', borderColor: 'color-mix(in srgb, var(--alert) 35%, transparent)' }}>
+              <p className="meta alert">{t.simulation.impactLabel}</p>
+              <p className="num-md" style={{ color: 'var(--alert)', margin: '10px 0' }}>
+                <bdi dir="ltr">−{risk}%</bdi> {t.simulation.impact}
               </p>
-              <div className="flex flex-col gap-6 sm:flex-row">
-                <div className="relative aspect-square flex-1 overflow-hidden rounded-lg border border-outline bg-background">
-                  <img src="/images/chat/leaf-scan.jpg" alt="" className="absolute inset-0 size-full object-cover mix-blend-luminosity" />
-                  <div className="absolute inset-4 border border-accent/30">
-                    <span className="absolute start-0 top-0 size-2 border-s-2 border-t-2 border-danger" />
-                    <span className="absolute end-0 top-0 size-2 border-e-2 border-t-2 border-danger" />
-                    <span className="absolute bottom-0 start-0 size-2 border-b-2 border-s-2 border-danger" />
-                    <span className="absolute bottom-0 end-0 size-2 border-b-2 border-e-2 border-danger" />
-                  </div>
-                </div>
-                <div className="flex flex-1 flex-col justify-between gap-6">
-                  <div className="flex flex-col gap-2">
-                    <span className="self-start rounded bg-danger/10 px-2 py-1 text-xs font-bold tracking-[0.96px] text-danger">{t.diagnosis.badge}</span>
-                    <h2 className="text-[32px] leading-10 font-semibold">{t.diagnosis.title}</h2>
-                    <div className="flex items-end justify-between pt-2">
-                      <span className="text-xs font-bold tracking-[0.96px] text-muted">{t.diagnosis.confidence}</span>
-                      <span className="text-[28px] leading-8 font-bold tracking-[-0.28px] text-accent">89%</span>
-                    </div>
-                    <div className="h-2 overflow-hidden rounded-full bg-soil">
-                      <div className="h-full w-[89%] rounded-full bg-accent" />
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-2 rounded-lg border border-outline bg-surface p-4">
-                    <p className="flex items-center gap-1 text-xs font-bold tracking-[0.96px] text-info">
-                      <img src="/images/chat/protocol.svg" alt="" width={9.35} height={9.33} />
-                      {t.diagnosis.protocol}
-                    </p>
-                    <p className="text-sm">{t.diagnosis.protocolBody}</p>
-                  </div>
-                </div>
-              </div>
+              <p className="muted" style={{ fontSize: 14 }}>{t.simulation.impactBody}</p>
             </div>
-          </div>
-
-          <div className="flex max-w-[828px] gap-4 pt-4">
-            <Avatar icon="message.svg" w={11.67} h={11.67} />
-            <p className={`${bot} border-outline`}>{t.morning}</p>
-          </div>
-
-          <div className="flex justify-end gap-4 pt-2">
-            <p className={user}>{t.userSimulation}</p>
-            <UserAvatar />
-          </div>
-
-          <div className="flex max-w-[877px] gap-4 pt-2">
-            <Avatar icon="bot.svg" w={10.5} h={9.33} />
-            <div className={`${bot} flex flex-1 flex-col gap-6 border-outline p-6 shadow-lg`}>
-              <p className="flex items-center gap-2 text-xs font-bold tracking-[0.96px] text-muted">
-                <img src="/images/chat/irrigation.svg" alt="" width={11.38} height={10} />
-                {t.simulation.label}
-              </p>
-              <div className="text-center">
-                <p className="text-lg leading-7">{t.simulation.heading}</p>
-                <p className="flex items-baseline justify-center gap-2">
-                  <span className="text-[56px] leading-[64px] font-bold tracking-[-1.12px]">{hours}</span>
-                  <span className="text-2xl font-semibold text-muted">{t.simulation.unit}</span>
-                </p>
-              </div>
-              <div className="flex flex-col gap-4 px-4 pt-2">
-                <input
-                  type="range"
-                  min={0}
-                  max={72}
-                  value={hours}
-                  onChange={(e) => setHours(Number(e.target.value))}
-                  aria-label={t.simulation.heading}
-                  className="range-soil"
-                />
-                <div className="flex justify-between text-xs font-bold tracking-[0.96px] text-muted/50">
-                  <span>{t.simulation.min}</span>
-                  <span>{t.simulation.max}</span>
-                </div>
-              </div>
-              <div className="flex flex-col items-center gap-2 rounded-lg border border-danger/30 bg-linear-to-t from-danger/10 to-danger/0 bg-surface p-5 text-center">
-                <p className="text-xs font-bold tracking-[0.96px] text-danger">{t.simulation.impactLabel}</p>
-                <p className="text-[28px] leading-8 font-bold tracking-[-0.28px] text-danger">
-                  <bdi dir="ltr">-{risk}%</bdi> {t.simulation.impact}
-                </p>
-                <p className="text-sm text-muted">{t.simulation.impactBody}</p>
-              </div>
-              <div className="flex justify-end gap-3">
-                <button onClick={() => setHours(24)} className="cursor-pointer rounded-full border border-outline-variant px-5 py-2 text-sm text-muted hover:text-on-surface">
-                  {t.simulation.cancel}
-                </button>
-                <button className="cursor-pointer rounded-full bg-accent px-5 py-2 text-sm text-background hover:bg-primary">{t.simulation.apply}</button>
-              </div>
+            <div className="actions" style={{ justifyContent: 'flex-end', gap: 12 }}>
+              <button className="btn btn-ghost btn-sm" onClick={() => setHours(24)}>{t.simulation.cancel}</button>
+              <button className="btn btn-solid btn-sm">{t.simulation.apply}</button>
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="border-t border-outline bg-raised p-4">
-          <div className="flex items-center gap-3 rounded-full border border-outline bg-background py-2 ps-5 pe-2 text-muted shadow-lg">
-            <img src="/images/chat/mic.svg" alt="" width={13} height={18.25} />
-            <span className="flex-1 py-2">{t.placeholder}</span>
-            <span className="flex size-8 items-center justify-center rounded-full bg-accent">
-              <img src="/images/chat/send.svg" alt="" width={16} height={16} className="rtl:-scale-x-100" />
-            </span>
-          </div>
-        </div>
-      </section>
+      <div style={{ position: 'sticky', bottom: 0, background: 'linear-gradient(180deg, transparent, var(--canvas) 30%)', padding: '32px 0 24px' }}>
+        <label className="composer">
+          <input placeholder={t.placeholder} />
+          <span className="send">↑</span>
+        </label>
+      </div>
     </div>
   );
 }

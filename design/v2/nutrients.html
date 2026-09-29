@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JoME — Nutrients · v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header id="nav"></header>
+
+<header class="bleed">
+  <img src="../../public/images/nutrients/hero.jpg" alt="The JoME Smart Injector releasing a drop of liquid nutrient onto soil">
+  <div class="wrap"><div class="hero" style="padding:0">
+    <div class="hero-grid">
+      <div style="display:flex;flex-direction:column;gap:28px">
+        <p class="label" style="color:var(--text-2)">JoME Smart Injector</p>
+        <h1>Precision nutrition for <em>every crop.</em></h1>
+        <p class="lead" style="max-width:560px;color:var(--text)">An automated delivery system that injects liquid minerals precisely where and when they are needed. Cultivate healthier plants, optimize resource usage, and elevate your yield with intelligent stewardship.</p>
+        <div class="actions">
+          <a href="#" class="btn btn-solid">Optimize your soil</a>
+          <a href="#delivery" class="link">Learn more <span class="arrow">↓</span></a>
+        </div>
+      </div>
+      <aside class="panel" style="background:rgb(15 15 13 / .72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)" aria-label="Current nutrient output">
+        <div class="panel-head"><p class="label">Current output</p><p class="num-sm">Optimal</p></div>
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <div class="kv-meter"><span>Nitrogen (N)</span><div class="meter sky"><i style="width:75%"></i></div><span class="v">75</span></div>
+          <div class="kv-meter"><span>Phosphorus (P)</span><div class="meter sage"><i style="width:60%"></i></div><span class="v">60</span></div>
+          <div class="kv-meter"><span>Potassium (K)</span><div class="meter clay"><i style="width:85%"></i></div><span class="v">85</span></div>
+        </div>
+      </aside>
+    </div>
+  </div></div>
+</header>
+
+<section class="section" id="delivery">
+  <div class="wrap" style="display:flex;flex-direction:column;gap:64px">
+    <div class="head center">
+      <p class="label">01 — Intelligent nutrient delivery</p>
+      <h2>Stop blanket fertilizing.</h2>
+      <p class="lead">Start feeding your soil with surgical precision based on real-time data.</p>
+    </div>
+
+    <div class="cells">
+      <article class="cell span-8 has-img" style="min-height:420px">
+        <img class="cell-img" src="../../public/images/nutrients/map.jpg" alt="" style="opacity:.55">
+        <div class="cell-body">
+          <p class="label">Crop-specific targeting</p>
+          <h3 class="h3">Different crops, one irrigation cycle.</h3>
+          <p class="muted">The Smart Injector routes specific blends to distinct zones — giving tomatoes heavy potassium while providing cucumbers balanced nitrogen simultaneously.</p>
+        </div>
+      </article>
+
+      <article class="cell span-4">
+        <div class="cell-body">
+          <p class="label">Real-time mineral monitoring</p>
+          <h3 class="h3">Your soil, read continuously.</h3>
+          <p class="muted">Embedded soil sensors track nitrogen, phosphorus, and potassium levels, with high-contrast visualization of your soil's health.</p>
+        </div>
+        <div class="cell-foot readings">
+          <div><span class="num-md" style="color:var(--sky)">42</span><span class="label">N</span></div>
+          <div><span class="num-md" style="color:var(--sage)">18</span><span class="label">P</span></div>
+          <div><span class="num-md" style="color:var(--clay)">36</span><span class="label">K</span></div>
+        </div>
+      </article>
+
+      <article class="cell span-5">
+        <div class="cell-body">
+          <p class="label">Smart recommendation engine</p>
+          <h3 class="h3">The right mix, suggested for you.</h3>
+          <p class="muted">AI-driven insights analyze soil state, weather patterns, and specific crop growth stages to autonomously suggest the optimal nutrient mix.</p>
+        </div>
+        <div class="cell-foot panel-sunken" style="display:flex;align-items:center;gap:20px">
+          <div class="ring">
+            <svg width="72" height="72" viewBox="0 0 72 72"><circle cx="36" cy="36" r="32" fill="none" stroke="var(--hairline-strong)" stroke-width="2"/><circle cx="36" cy="36" r="32" fill="none" stroke="var(--wheat)" stroke-width="2" stroke-dasharray="189 201"/></svg>
+            <span>94%</span>
+          </div>
+          <div><p class="meta">AI confidence</p><p style="margin-top:4px">Optimal blend calculated</p></div>
+        </div>
+      </article>
+
+      <article class="cell span-7 has-img" style="min-height:420px;justify-content:center">
+        <img class="cell-img right" src="../../public/images/nutrients/jug.jpg" alt="A container of JoME Pure Nutrients">
+        <div class="cell-body" style="max-width:380px">
+          <span class="tag wheat" style="align-self:flex-start">Proprietary blend</span>
+          <h3 class="h3">JoME Pure Nutrients</h3>
+          <p class="muted">Maximize the hardware's potential with our exclusive line of high-performance, sediment-free liquid mineral blends designed for seamless injection and rapid root absorption.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <p class="label">Begin</p>
+    <h2>Feed your soil with <em style="color:var(--sage)">precision.</em></h2>
+    <div class="actions">
+      <a href="#" class="btn btn-solid">Optimize your soil</a>
+      <a href="hardware.html" class="link">See the hardware <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<footer id="footer"></footer>
+<script src="partials.js"></script>
+</body>
+</html>
