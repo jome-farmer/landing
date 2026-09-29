@@ -22,7 +22,7 @@ export default function Features() {
         {features.map((feature) => (
           <div
             key={feature.title}
-            className="flex flex-col gap-4 rounded-xl border border-outline bg-surface p-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] hover:-translate-y-1 transition-transform duration-300"
+            className="flex flex-col gap-4 rounded-xl border border-outline bg-surface p-8 sheen hover:-translate-y-1 transition-transform duration-300"
           >
             <div className="mb-2 flex size-12 items-center justify-center rounded-lg bg-surface-variant">
               <img src={`/images/${feature.icon}`} alt="" width={feature.w} height={feature.h} />
