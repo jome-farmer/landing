@@ -104,9 +104,9 @@
   .meter > i { position: absolute; inset-block: 0; inset-inline-start: 0; background: var(--text); }
   .meter.sage > i { background: var(--sage); } .meter.sky > i { background: var(--sky); } .meter.clay > i { background: var(--clay); } .meter.wheat > i { background: var(--wheat); }
   .kv { display: grid; grid-template-columns: 1fr auto; gap: 10px 20px; align-items: center; }
-  .ring { width: 72px; height: 72px; position: relative; flex-shrink: 0; }
-  .ring svg { transform: rotate(-90deg); }
-  .ring span { position: absolute; inset: 0; display: grid; place-items: center; font: 400 22px/1 var(--serif); }
+  .progress-ring { width: 72px; height: 72px; position: relative; flex-shrink: 0; }
+  .progress-ring svg { transform: rotate(-90deg); }
+  .progress-ring span { position: absolute; inset: 0; display: grid; place-items: center; font: 400 22px/1 var(--serif); }
   .tag { display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border: 1px solid var(--hairline-strong); border-radius: 999px; font-size: 12px; color: var(--text-2); }
   .tag.alert { border-color: color-mix(in srgb, var(--alert) 45%, transparent); color: var(--alert); }
   .tag.wheat { border-color: color-mix(in srgb, var(--wheat) 45%, transparent); color: var(--wheat); }
