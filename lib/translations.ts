@@ -70,12 +70,12 @@ export const translations = {
         ],
       },
       live: {
-        label: "Live demo farm",
-        title: "Green Valley Farm,",
+        label: "Our farm, live",
+        title: "Derake Garden, Pariz,",
         titleEm: "right now.",
         items: ["Water saved today", "Zones irrigating", "Sensor readings today", "Nutrient doses today"],
         litres: "L",
-        note: "Simulated in real time from a 320-hectare demo farm.",
+        note: "Simulated in real time from our own farm, Derake Garden in Pariz.",
       },
       film: {
         label: "Our story",
@@ -542,12 +542,12 @@ export const translations = {
         ],
       },
       live: {
-        label: "مزرعه نمایشی زنده",
-        title: "مزرعه گرین‌ولی،",
+        label: "باغ ما، زنده",
+        title: "باغ دراق پاریز،",
         titleEm: "همین حالا.",
         items: ["آب صرفه‌جویی‌شده امروز", "مناطق در حال آبیاری", "داده‌های حسگر امروز", "دوزهای تغذیه امروز"],
         litres: "لیتر",
-        note: "شبیه‌سازی لحظه‌ای از یک مزرعه نمایشی ۳۲۰ هکتاری.",
+        note: "شبیه‌سازی لحظه‌ای از باغ خودمان، باغ دراق در پاریز.",
       },
       film: {
         label: "داستان ما",
