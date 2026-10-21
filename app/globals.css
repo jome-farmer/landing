@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @import "../design/v3/hero.css";
 
+/* Vazirmatn (Persian): the official variable font (OFL, github.com/rastikerdar/vazirmatn), bundled so the
+   build doesn't depend on Google Fonts and every weight is real rather than synthesized */
+@font-face { font-family: Vazirmatn; font-style: normal; font-weight: 100 900; font-display: swap; src: url(/fonts/vazirmatn-variable.woff2) format("woff2"); }
+
 /* JoME v2 — Editorial. Reference mock: design/v2/.
    --serif / --sans are set per locale in app/[locale]/layout.tsx. */
 :root {
@@ -457,3 +461,13 @@
   .flow *, .flow-seg::after, .spin, .ask-big, .diag-scan *, .diag-meter::after, dialog.ask[open], .zone .npk i::after, .dot { animation: none !important; }
   .flow .flow-node { color: #fff; border-color: var(--c); } .flow-seg::after { transform: none !important; } .flow-seg i { display: none; }
 }
+
+/* Persian typography: bolder headings (Vazirmatn reads light at display sizes), room for dots
+   and descenders, and slightly larger small text. Unlayered so it wins over component rules. */
+[dir="rtl"] :is(h1, h2, h3, blockquote) { font-weight: 700; line-height: 1.35; letter-spacing: 0; }
+[dir="rtl"] :is(.lead, p, li) { line-height: 1.85; }
+[dir="rtl"] :is(.label, .meta) { font-size: 13px; font-weight: 500; }
+[dir="rtl"] b { font-weight: 600; }
+[dir="rtl"] .hs-tag { font-weight: 600; }
+[dir="rtl"] .hs-card p, [dir="rtl"] .hs-head p { line-height: 1.6; }
+[dir="rtl"] .num, [dir="rtl"] .hs-big, [dir="rtl"] .live-grid b { font-weight: 600; }
