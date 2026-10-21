@@ -24,6 +24,10 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+// Splash: shown until the page and its images have loaded (or 8s at most), then fades out.
+// Runs inline so it works before React hydrates; it only sets an attribute on <html>.
+const SPLASH = `(function(){var d=document.documentElement,f=function(){d.setAttribute('data-loaded','')};document.readyState==='complete'?f():(addEventListener('load',f),setTimeout(f,8000))})()`;
+
 export const metadata: Metadata = {
   title: "JoME Smart Irrigation",
   description: "Precision Agriculture Powered by AI",
@@ -47,8 +51,15 @@ export default async function LocaleLayout({
   } as CSSProperties;
 
   return (
-    <html lang={localeTyped} dir={isRTL ? "rtl" : "ltr"}>
+    <html lang={localeTyped} dir={isRTL ? "rtl" : "ltr"} suppressHydrationWarning>
       <body className={isRTL ? undefined : `${outfit.variable} ${inter.variable}`} style={fonts}>
+        <div id="splash" aria-hidden="true">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/logo-light.png" alt="" />
+          <i />
+        </div>
+        <noscript><style>{"#splash{display:none}"}</style></noscript>
+        <script dangerouslySetInnerHTML={{ __html: SPLASH }} />
         <StoreProvider>
           <div className="flex min-h-screen flex-col">
             <Header />

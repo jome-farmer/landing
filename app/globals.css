@@ -471,3 +471,15 @@
 [dir="rtl"] .hs-tag { font-weight: 600; }
 [dir="rtl"] .hs-card p, [dir="rtl"] .hs-head p { line-height: 1.6; }
 [dir="rtl"] .num, [dir="rtl"] .hs-big, [dir="rtl"] .live-grid b { font-weight: 600; }
+
+/* Splash (app/[locale]/layout.tsx): covers the page until it has loaded */
+#splash { position: fixed; inset: 0; z-index: 1000; display: grid; place-content: center; justify-items: center; gap: 28px; background: radial-gradient(ellipse at 50% 45%, #10261a, var(--canvas) 70%); transition: opacity .6s ease, visibility .6s; }
+#splash img { width: min(200px, 50vw); height: auto; animation: splash-breathe 2.2s ease-in-out infinite; }
+#splash i { position: relative; width: 160px; height: 2px; border-radius: 2px; overflow: hidden; background: rgb(255 255 255 / .1); }
+#splash i::after { content: ""; position: absolute; inset: 0; width: 40%; border-radius: 2px; background: var(--sage); box-shadow: 0 0 10px var(--sage); animation: splash-bar 1.3s ease-in-out infinite; }
+@keyframes splash-breathe { 50% { opacity: .65; transform: scale(.97); } }
+@keyframes splash-bar { from { transform: translateX(-100%); } to { transform: translateX(260%); } }
+html:not([data-loaded]) { overflow: hidden; }
+html[data-loaded] #splash { opacity: 0; visibility: hidden; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { #splash img, #splash i::after { animation: none; } }
+
