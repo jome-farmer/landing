@@ -3,10 +3,9 @@
 import type { FormEvent } from 'react';
 import { usePathname } from 'next/navigation';
 import { Arrow } from './Icons';
+import { EMAIL } from '@/lib/site';
 import { useTranslations } from '@/lib/use-translations';
 
-// TODO: confirm the real inbox before launch.
-export const EMAIL = 'info@jome-farmer.ir';
 
 // ponytail: static export has no backend, so the form hands off to the visitor's mail app; swap for a form endpoint when one exists.
 export default function Contact() {

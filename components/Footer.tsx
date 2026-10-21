@@ -18,8 +18,8 @@ export default function Footer() {
         [l.aiAgent, `/${locale}/ai-agent/`],
       ],
     },
-    { title: t.company, links: [[l.aboutUs, '#'], [l.careers, '#']] },
-    { title: t.legal, links: [[l.privacyPolicy, '#'], [l.termsOfService, '#']] },
+    { title: t.company, links: [[l.aboutUs, `/${locale}/about/`], [l.careers, `/${locale}/careers/`]] },
+    { title: t.legal, links: [[l.privacyPolicy, `/${locale}/privacy/`], [l.termsOfService, `/${locale}/terms/`]] },
   ];
 
   return (
