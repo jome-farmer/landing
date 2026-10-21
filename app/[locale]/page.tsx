@@ -37,7 +37,7 @@ export default function HomePage() {
         {t.stats.map((stat, i) => (
           <div key={stat.label} className="figure">
             <span className="label">{stat.label}</span>
-            <span className="num">{[<CountUp key="w" to={30} prefix="−" suffix="%" />, <CountUp key="y" to={25} prefix="+" suffix="%" />, <CountUp key="f" to={500} suffix="+" />][i]}</span>
+            <span className="num">{[<CountUp key="w" to={30} suffix="%" />, <CountUp key="y" to={25} prefix="+" suffix="%" />, <CountUp key="f" to={500} suffix="+" />][i]}</span>
             <p>{stat.desc}</p>
           </div>
         ))}
