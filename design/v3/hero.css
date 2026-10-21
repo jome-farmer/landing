@@ -13,7 +13,7 @@
 .hs-brand .logo { height: calc(var(--u) * 46); }
 .hs-brand .concept { font-size: calc(var(--u) * 12); padding: calc(var(--u) * 4) calc(var(--u) * 10); }
 @media (max-width: 899px) { .hs-brand .concept { font-size: 11px; padding: 3px 9px; } }
-.hs-brand .hs-tag { margin: 0; }
+.hs-brand .hs-tag { margin: 0; white-space: normal; }
 @media (max-width: 899px) { .hs-brand { padding: 16px 18px; gap: 10px; } .hs-brand .logo { height: 30px; } }
 
 /* callout cards */
