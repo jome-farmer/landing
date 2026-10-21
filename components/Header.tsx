@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLocale, useTranslations } from '@/lib/use-translations';
+import Logo from './Logo';
 import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Header() {
@@ -10,18 +11,16 @@ export default function Header() {
   const locale = useLocale();
   const pathname = usePathname() ?? '';
 
+  const home = `/${locale}/`;
   const tabs = [
-    { href: `/${locale}/#capabilities`, label: t.nav.tech, match: null },
-    { href: `/${locale}/ai-agent/`, label: t.nav.aiAgent, match: `/${locale}/ai-agent` },
-    { href: `/${locale}/nutrients/`, label: t.nav.nutrients, match: `/${locale}/nutrients` },
-    { href: `/${locale}/hardware/`, label: t.nav.hardware, match: `/${locale}/hardware` },
+    { href: home, label: t.nav.tech },
+    { href: `/${locale}/hardware/`, label: t.nav.hardware },
+    { href: `/${locale}/ai-agent/`, label: t.nav.aiAgent },
+    { href: `/${locale}/nutrients/`, label: t.nav.nutrients },
   ];
+  const isOn = (href: string) => (href === home ? pathname === home || pathname === `/${locale}` : pathname.startsWith(href.slice(0, -1)));
   const links = tabs.map((tab) => (
-    <Link
-      key={tab.href}
-      href={tab.href}
-      aria-current={tab.match && pathname.startsWith(tab.match) ? 'page' : undefined}
-    >
+    <Link key={tab.href} href={tab.href} aria-current={isOn(tab.href) ? 'page' : undefined}>
       {tab.label}
     </Link>
   ));
@@ -30,16 +29,13 @@ export default function Header() {
     <nav className="nav">
       <div className="wrap">
         <Link href={`/${locale}/`} className="wordmark">
-          JoME
+          <Logo />
         </Link>
         <div className="tabs">{links}</div>
         <div className="nav-end">
           <LanguageSwitcher />
-          <a href="#" className="link">
-            {t.common.requestQuote} <span className="arrow">→</span>
-          </a>
-          <a href="#" className="btn btn-solid btn-sm">
-            {t.common.getStarted}
+          <a href="#contact" className="btn btn-green btn-sm">
+            {t.nav.contact}
           </a>
         </div>
         {/* keyed on pathname so the menu closes after navigating */}
@@ -52,8 +48,8 @@ export default function Header() {
             {links}
             <div className="row-end">
               <LanguageSwitcher />
-              <a href="#" className="btn btn-solid btn-sm">
-                {t.common.getStarted}
+              <a href="#contact" className="btn btn-green btn-sm">
+                {t.nav.contact}
               </a>
             </div>
           </div>
