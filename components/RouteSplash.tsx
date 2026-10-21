@@ -16,6 +16,18 @@ export default function RouteSplash() {
   const pathname = usePathname();
   const prev = useRef(pathname);
 
+  // Every time the layout mounts, make sure the splash can leave. React may re-create <html> (switching
+  // language, recovering from a hydration mismatch) without the flag the inline script set, and that
+  // script does not run again, so without this the splash would stay up until a refresh.
+  useEffect(() => {
+    const html = document.documentElement;
+    const done = () => html.setAttribute('data-loaded', '');
+    if (document.readyState === 'complete') { done(); return; }
+    addEventListener('load', done, { once: true });
+    const cap = setTimeout(done, 8000);
+    return () => { removeEventListener('load', done); clearTimeout(cap); };
+  }, []);
+
   useEffect(() => {
     if (prev.current === pathname) return; // first load, or React re-running the effect
     prev.current = pathname;

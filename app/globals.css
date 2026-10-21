@@ -487,7 +487,9 @@
 #splash i::after { content: ""; position: absolute; inset: 0; width: 40%; border-radius: 2px; background: var(--sage); box-shadow: 0 0 10px var(--sage); animation: splash-bar 1.3s ease-in-out infinite; }
 @keyframes splash-breathe { 50% { opacity: .65; transform: scale(.97); } }
 @keyframes splash-bar { from { transform: translateX(-100%); } to { transform: translateX(260%); } }
-html:not([data-loaded]) { overflow: hidden; }
 html[data-loaded] #splash { opacity: 0; visibility: hidden; pointer-events: none; }
+/* safety net if no script ever marks the page loaded: the splash leaves on its own after 10s */
+html:not([data-loaded]) #splash { animation: splash-timeout .6s ease 10s forwards; }
+@keyframes splash-timeout { to { opacity: 0; visibility: hidden; pointer-events: none; } }
 @media (prefers-reduced-motion: reduce) { #splash .logo, #splash i::after { animation: none; } }
 
