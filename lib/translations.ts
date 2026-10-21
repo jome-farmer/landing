@@ -77,6 +77,14 @@ export const translations = {
         litres: "L",
         note: "Simulated in real time from a 320-hectare demo farm.",
       },
+      film: {
+        label: "Our story",
+        title: "Every drop",
+        titleEm: "counts.",
+        subtitle: "Jome began with a simple idea: water and nutrients should reach the roots, not the air. Everything we build follows that drop.",
+        soundOn: "Sound on",
+        soundOff: "Sound off",
+      },
       scale: {
         label: "Built for every scale",
         title: "From home gardens",
@@ -540,6 +548,14 @@ export const translations = {
         items: ["آب صرفه‌جویی‌شده امروز", "مناطق در حال آبیاری", "داده‌های حسگر امروز", "دوزهای تغذیه امروز"],
         litres: "لیتر",
         note: "شبیه‌سازی لحظه‌ای از یک مزرعه نمایشی ۳۲۰ هکتاری.",
+      },
+      film: {
+        label: "داستان ما",
+        title: "هر قطره",
+        titleEm: "ارزشمند است.",
+        subtitle: "جمعه با یک ایده ساده شروع شد: آب و مواد مغذی باید به ریشه برسند، نه به هوا. هر چیزی که می‌سازیم پیرو همین قطره است.",
+        soundOn: "صدا روشن",
+        soundOff: "صدا خاموش",
       },
       scale: {
         label: "برای هر مقیاسی",
