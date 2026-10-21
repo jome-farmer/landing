@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
-import { Outfit, Inter, Vazirmatn } from "next/font/google";
+import { Outfit, Inter } from "next/font/google";
 import "../globals.css";
 import StoreProvider from "@/lib/store-provider";
 import Header from "@/components/Header";
@@ -24,12 +24,6 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const vazirmatn = Vazirmatn({
-  weight: ["400", "500"],
-  subsets: ["arabic", "latin"],
-  variable: "--font-vazirmatn",
-});
-
 export const metadata: Metadata = {
   title: "JoME Smart Irrigation",
   description: "Precision Agriculture Powered by AI",
@@ -46,15 +40,15 @@ export default async function LocaleLayout({
   const localeTyped = locale as Locale;
   const isRTL = localeTyped === "fa";
 
-  // Persian has no serif pairing here, so both roles use Vazirmatn
+  // Persian has no serif pairing here, so both roles use Vazirmatn (bundled @font-face in globals.css)
   const fonts = {
-    "--serif": isRTL ? "var(--font-vazirmatn), serif" : "var(--font-outfit), system-ui, sans-serif",
-    "--sans": isRTL ? "var(--font-vazirmatn), sans-serif" : "var(--font-inter), system-ui, sans-serif",
+    "--serif": isRTL ? "Vazirmatn, Tahoma, sans-serif" : "var(--font-outfit), system-ui, sans-serif",
+    "--sans": isRTL ? "Vazirmatn, Tahoma, sans-serif" : "var(--font-inter), system-ui, sans-serif",
   } as CSSProperties;
 
   return (
     <html lang={localeTyped} dir={isRTL ? "rtl" : "ltr"}>
-      <body className={isRTL ? vazirmatn.variable : `${outfit.variable} ${inter.variable}`} style={fonts}>
+      <body className={isRTL ? undefined : `${outfit.variable} ${inter.variable}`} style={fonts}>
         <StoreProvider>
           <div className="flex min-h-screen flex-col">
             <Header />
