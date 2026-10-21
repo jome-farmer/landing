@@ -78,12 +78,13 @@ export default async function LocaleLayout({
   return (
     <html lang={localeTyped} dir={isRTL ? "rtl" : "ltr"} suppressHydrationWarning>
       <body className={isRTL ? undefined : `${outfit.variable} ${inter.variable}`} style={fonts}>
-        <div id="splash" aria-hidden="true">
+        {/* the inline script below updates the splash before React hydrates, so React must not diff it */}
+        <div id="splash" aria-hidden="true" suppressHydrationWarning>
           <Logo gradient="jome-leaf-splash" />
           <p className="splash-quote">{t.footer.quote}</p>
           <div className="splash-progress">
             <i />
-            <span><span>{t.common.loading}</span><b className="splash-pct" dir="ltr">0%</b></span>
+            <span><span>{t.common.loading}</span><b className="splash-pct" dir="ltr" suppressHydrationWarning>0%</b></span>
           </div>
         </div>
         <noscript><style>{"#splash{display:none}"}</style></noscript>
