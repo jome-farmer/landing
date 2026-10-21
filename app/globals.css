@@ -1,10 +1,9 @@
 @import "tailwindcss";
 @import "../design/v3/hero.css";
 
-/* Vazirmatn (Persian), bundled: Google Fonts serves it in a form next/font cannot build in CI */
-@font-face { font-family: Vazirmatn; font-style: normal; font-weight: 100 900; font-display: swap; src: url(/fonts/vazirmatn-arabic.woff2) format("woff2"); unicode-range: U+6??,U+750-77F,U+870-891,U+897-8E1,U+8E3-8FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC7,U+10EC9-10EEE,U+10EF?,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1; }
-@font-face { font-family: Vazirmatn; font-style: normal; font-weight: 100 900; font-display: swap; src: url(/fonts/vazirmatn-latin-ext.woff2) format("woff2"); unicode-range: U+100-2BA,U+2BD-2C5,U+2C7-2CC,U+2CE-2D7,U+2DD-2FF,U+304,U+308,U+329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF; }
-@font-face { font-family: Vazirmatn; font-style: normal; font-weight: 100 900; font-display: swap; src: url(/fonts/vazirmatn-latin.woff2) format("woff2"); unicode-range: U+??,U+131,U+152-153,U+2BB-2BC,U+2C6,U+2DA,U+2DC,U+304,U+308,U+329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+/* Vazirmatn (Persian): the official variable font (OFL, github.com/rastikerdar/vazirmatn), bundled so the
+   build doesn't depend on Google Fonts and every weight is real rather than synthesized */
+@font-face { font-family: Vazirmatn; font-style: normal; font-weight: 100 900; font-display: swap; src: url(/fonts/vazirmatn-variable.woff2) format("woff2"); }
 
 /* JoME v2 — Editorial. Reference mock: design/v2/.
    --serif / --sans are set per locale in app/[locale]/layout.tsx. */
@@ -462,3 +461,13 @@
   .flow *, .flow-seg::after, .spin, .ask-big, .diag-scan *, .diag-meter::after, dialog.ask[open], .zone .npk i::after, .dot { animation: none !important; }
   .flow .flow-node { color: #fff; border-color: var(--c); } .flow-seg::after { transform: none !important; } .flow-seg i { display: none; }
 }
+
+/* Persian typography: bolder headings (Vazirmatn reads light at display sizes), room for dots
+   and descenders, and slightly larger small text. Unlayered so it wins over component rules. */
+[dir="rtl"] :is(h1, h2, h3, blockquote) { font-weight: 700; line-height: 1.35; letter-spacing: 0; }
+[dir="rtl"] :is(.lead, p, li) { line-height: 1.85; }
+[dir="rtl"] :is(.label, .meta) { font-size: 13px; font-weight: 500; }
+[dir="rtl"] b { font-weight: 600; }
+[dir="rtl"] .hs-tag { font-weight: 600; }
+[dir="rtl"] .hs-card p, [dir="rtl"] .hs-head p { line-height: 1.6; }
+[dir="rtl"] .num, [dir="rtl"] .hs-big, [dir="rtl"] .live-grid b { font-weight: 600; }
