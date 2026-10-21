@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import FarmDashboard from '@/components/FarmDashboard';
 import CountUp from '@/components/CountUp';
+import Film from '@/components/Film';
 import Flow from '@/components/Flow';
 import Scene, { cover, rects, useTick, type SceneCard } from '@/components/Scene';
 import { Arrow, Icon, type IconName } from '@/components/Icons';
@@ -98,6 +99,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <Film />
     </>
   );
 }
