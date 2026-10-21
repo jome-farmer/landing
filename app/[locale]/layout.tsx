@@ -6,6 +6,8 @@ import StoreProvider from "@/lib/store-provider";
 import Header from "@/components/Header";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import Logo from "@/components/Logo";
+import RouteSplash from "@/components/RouteSplash";
 import { type Locale } from "@/lib/translations";
 
 export function generateStaticParams() {
@@ -54,12 +56,12 @@ export default async function LocaleLayout({
     <html lang={localeTyped} dir={isRTL ? "rtl" : "ltr"} suppressHydrationWarning>
       <body className={isRTL ? undefined : `${outfit.variable} ${inter.variable}`} style={fonts}>
         <div id="splash" aria-hidden="true">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/logo-light.png" alt="" />
+          <Logo gradient="jome-leaf-splash" />
           <i />
         </div>
         <noscript><style>{"#splash{display:none}"}</style></noscript>
         <script dangerouslySetInnerHTML={{ __html: SPLASH }} />
+        <RouteSplash />
         <StoreProvider>
           <div className="flex min-h-screen flex-col">
             <Header />
