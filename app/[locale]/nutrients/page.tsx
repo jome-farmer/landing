@@ -1,6 +1,6 @@
 'use client';
 
-import { EMAIL } from '@/components/Contact';
+import { EMAIL } from '@/lib/site';
 import Flow from '@/components/Flow';
 import { Arrow, Icon } from '@/components/Icons';
 import Ring from '@/components/Ring';
