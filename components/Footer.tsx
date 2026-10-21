@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Logo from './Logo';
 import { useLocale, useTranslations } from '@/lib/use-translations';
 
 export default function Footer() {
@@ -12,7 +13,7 @@ export default function Footer() {
     {
       title: t.product,
       links: [
-        [l.features, `/${locale}/#capabilities`],
+        [l.features, `/${locale}/`],
         [l.techSpecs, `/${locale}/hardware/`],
         [l.aiAgent, `/${locale}/ai-agent/`],
       ],
@@ -26,7 +27,7 @@ export default function Footer() {
       <div className="wrap">
         <div className="foot">
           <div>
-            <span className="wordmark">JoME</span>
+            <span className="wordmark"><Logo /></span>
             <p>{t.description}</p>
           </div>
           <div className="cols">
@@ -42,6 +43,10 @@ export default function Footer() {
             ))}
           </div>
         </div>
+        <figure className="foot-quote">
+          <blockquote>{t.quote}</blockquote>
+          <figcaption>{t.quoteNote}</figcaption>
+        </figure>
         <div className="legal">
           <span>{t.copyright}</span>
           <span className="social">

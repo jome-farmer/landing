@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jome hero (v3)</title>
+<style>
+:root{--canvas:#07110b;--text:#f2f6f1;--sage:#5ef08a;--gutter:clamp(20px,4vw,56px);--sans:'Inter',system-ui,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--text)}
+.bar{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;border-bottom:1px solid #1d3025;font:14px system-ui}
+.bar img{height:34px}.bar a{color:#a8b8ac;text-decoration:none}
+</style><link rel="stylesheet" href="/node_modules/maplibre-gl/dist/maplibre-gl.css"><link rel="stylesheet" href="hero.css"></head><body>
+<svg width="0" height="0" style="position:absolute"><symbol id="i-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-8 5-13 14-14 0 9-5 14-13 14"/><path d="M5 19c3-5 6-8 10-10"/></symbol><symbol id="i-drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c4 5 6 8 6 11a6 6 0 0 1-12 0c0-3 2-6 6-11Z"/></symbol><symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/></symbol><symbol id="i-wifi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19.5" r=".8"/></symbol><symbol id="i-chip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="10" y="10" width="4" height="4"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></symbol><symbol id="i-flask" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/><path d="M7.5 15h9"/></symbol><symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></symbol><symbol id="i-roots" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v8M12 11c-3 0-5 2-5 5M12 11c3 0 5 2 5 5M12 11v10M7 16v4M17 16v4"/></symbol><symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="1"/><circle cx="12" cy="6" r="1"/><circle cx="18" cy="6" r="1"/><circle cx="6" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="18" cy="12" r="1"/><circle cx="6" cy="18" r="1"/><circle cx="12" cy="18" r="1"/><circle cx="18" cy="18" r="1"/></symbol></svg>
+<div class="bar"><img src="/images/logo-light.png" alt="Jome"><a href="../index.html">← design index</a></div>
+
+<header class="hs">
+  <h1>Complete smart irrigation system, from soil to harvest</h1>
+  <p class="hs-tag">Complete smart irrigation system<br>from soil to harvest</p>
+
+  <svg class="hs-lines" viewBox="0 0 1796 876" preserveAspectRatio="none" aria-hidden="true"><polyline points="262,300 252,286 250,276"/><circle cx="250" cy="276" r="4.5"/><polyline points="573,426 447,426 447,420"/><circle cx="447" cy="420" r="4.5"/><polyline points="1255,345 1215,345 1192,398"/><circle cx="1192" cy="398" r="4.5"/><polyline points="1198,138 1182,138 1182,236"/><circle cx="1182" cy="236" r="4.5"/><polyline points="160,597 160,655 112,700"/><circle cx="112" cy="700" r="4.5"/><polyline points="445,606 425,606 418,606"/><circle cx="418" cy="606" r="4.5"/><polyline points="857,715 838,715 826,722"/><circle cx="826" cy="722" r="4.5"/><polyline points="1515,690 1470,690 1440,700"/><circle cx="1440" cy="700" r="4.5"/></svg>
+
+  <div class="hs-dash" style="--x:500;--y:30;--w:680">
+    <div class="hs-dash-top"><img src="/images/logo-light.png" alt="Jome"><span>Jome Farm Overview</span><button class="hs-expand" id="expand" aria-expanded="false" aria-label="Expand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button></div>
+    <div class="hs-dash-body">
+      <nav class="hs-nav"><span class="on"><svg aria-hidden="true"><use href="#i-grid"/></svg><em>Overview</em></span><span class=""><svg aria-hidden="true"><use href="#i-leaf"/></svg><em>Fields</em></span><span class=""><svg aria-hidden="true"><use href="#i-drop"/></svg><em>Irrigation</em></span><span class=""><svg aria-hidden="true"><use href="#i-flask"/></svg><em>Nutrients</em></span><span class=""><svg aria-hidden="true"><use href="#i-sun"/></svg><em>Weather</em></span><span class=""><svg aria-hidden="true"><use href="#i-chart"/></svg><em>Analytics</em></span></nav>
+      <div class="hs-map" id="farm-map"></div>
+      <div class="hs-kpis">
+        <div class="hs-kpi"><svg class="hs-ico"><use href="#i-leaf"/></svg><div><small>Plant Health</small><b>Excellent</b><i style="--p:90%"></i></div></div>
+        <div class="hs-kpi"><svg class="hs-ico water"><use href="#i-drop"/></svg><div><small>Soil Moisture</small><b id="soil">68%</b></div><svg class="spark" viewBox="0 0 100 30" preserveAspectRatio="none"><polyline id="soil-line" points="0,24 14,20 28,22 42,15 56,17 70,9 85,11 100,3" fill="none" stroke="currentColor" stroke-width="1.5" vector-effect="non-scaling-stroke"/></svg></div>
+        <div class="hs-kpi"><svg class="hs-ico"><use href="#i-leaf"/></svg><div><small>Nutrient Status</small><b>Optimal</b><i style="--p:78%"></i></div></div>
+        <div class="hs-kpi"><svg class="hs-ico sun"><use href="#i-sun"/></svg><div><small>Weather</small><b>24°C</b><small>Clear Sky</small></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hs-cards">
+      <div class="hs-card" style="--x:262;--y:250;--w:228"><svg class="hs-ico sun" aria-hidden="true"><use href="#i-sun"/></svg><div><b>Weather Monitoring</b><p>Tracks local weather conditions to optimize irrigation and nutrient schedules.</p></div></div>
+      <div class="hs-card" style="--x:573;--y:380;--w:255"><svg class="hs-ico " aria-hidden="true"><use href="#i-leaf"/></svg><div><b>Soil & Crop Sensors</b><p>Monitors soil moisture, EC, pH, temperature and plant health in real time.</p></div></div>
+      <div class="hs-card" style="--x:1255;--y:295;--w:264"><svg class="hs-ico " aria-hidden="true"><use href="#i-wifi"/></svg><div><b>Field Intelligence Hub</b><p>Collects sensor data and controls irrigation and nutrient injection in real time.</p></div></div>
+      <div class="hs-card" style="--x:1198;--y:84;--w:245"><svg class="hs-ico " aria-hidden="true"><use href="#i-chart"/></svg><div><b>Farm Management</b><p>Monitor every field, compare performance, and make smarter decisions with real-time data.</p></div></div>
+      <div class="hs-card" style="--x:45;--y:507;--w:232"><svg class="hs-ico water" aria-hidden="true"><use href="#i-drop"/></svg><div><b>Water Source & Filtration</b><p>Clean, filtered water for reliable, efficient irrigation.</p></div></div>
+      <div class="hs-card" style="--x:445;--y:552;--w:226"><svg class="hs-ico " aria-hidden="true"><use href="#i-chip"/></svg><div><b>Smart Controller</b><p>Automates irrigation and nutrient dosing based on soil, climate and plant conditions.</p></div></div>
+      <div class="hs-card" style="--x:857;--y:669;--w:240"><svg class="hs-ico " aria-hidden="true"><use href="#i-flask"/></svg><div><b>Nutrient Injection</b><p>Precisely doses liquid nutrients into the irrigation line for balanced nutrition.</p></div></div>
+      <div class="hs-card" style="--x:1515;--y:641;--w:246"><svg class="hs-ico water" aria-hidden="true"><use href="#i-drop"/></svg><div><b>Subsurface Irrigation</b><p>Delivers water and nutrients directly to the root zone with minimal evaporation.</p></div></div>
+      </div>
+</header>
+<script type="module">
+const dash = document.querySelector('.hs-dash'), btn = document.getElementById('expand');
+const toggle = (v = !dash.classList.contains('open')) => { dash.classList.toggle('open', v); btn.setAttribute('aria-expanded', v); };
+btn.onclick = () => toggle(); document.addEventListener('keydown', (e) => e.key === 'Escape' && toggle(false));
+import * as maplibregl from '/node_modules/maplibre-gl/dist/maplibre-gl.mjs';
+import { mountFarmMap } from './farm-map.js';
+const line = document.getElementById('soil-line'), soil = document.getElementById('soil');
+mountFarmMap(document.getElementById('farm-map'), maplibregl, {
+  onTick({ avg, series }) {
+    soil.textContent = Math.round(avg) + '%';
+    const max = Math.max(...series), min = Math.min(...series);
+    line.setAttribute('points', series.map((v, i) => `${(i / (series.length - 1)) * 100},${28 - ((v - min) / (max - min || 1)) * 24}`).join(' '));
+  },
+});
+</script>
+</body></html>

@@ -11,3 +11,9 @@ export function useLocale() {
 export function useTranslations() {
   return getTranslations(useLocale());
 }
+
+// Formats numbers in the page's script (Persian digits on /fa).
+export function useNumber() {
+  const nf = new Intl.NumberFormat(useLocale() === 'fa' ? 'fa-IR' : 'en', { maximumFractionDigits: 1 });
+  return (v: number) => nf.format(v);
+}
