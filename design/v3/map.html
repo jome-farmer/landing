@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jome farm map (v3)</title>
+<link rel="stylesheet" href="/node_modules/maplibre-gl/dist/maplibre-gl.css"><link rel="stylesheet" href="hero.css">
+<style>:root{--sans:system-ui,sans-serif}body{margin:0;background:#07110b;color:#fff;font:14px system-ui}
+#m{--u:1px;width:min(1100px,96vw);height:640px;margin:24px auto;border-radius:16px;overflow:hidden;border:1px solid #1d3025}
+.fm-chip{--u:1.8px}.fm-pin{--u:1.8px}p{text-align:center;color:#a8b8ac}</style></head><body>
+<p>Live farm map, full size (shared module: farm-map.js)</p><div id="m"></div>
+<script type="module">
+import * as maplibregl from '/node_modules/maplibre-gl/dist/maplibre-gl.mjs';
+import { mountFarmMap } from './farm-map.js';
+mountFarmMap(document.getElementById('m'), maplibregl);
+</script></body></html>

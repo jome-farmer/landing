@@ -1,139 +1,126 @@
 'use client';
 
-import { useTranslations } from '@/lib/use-translations';
+import Flow from '@/components/Flow';
+import Scene, { useTick, wave } from '@/components/Scene';
+import { Icon, type IconName } from '@/components/Icons';
+import { useNumber, useTranslations } from '@/lib/use-translations';
 
-type Spec = { title: string; body?: string };
 
-function Feature({
-  label,
-  title,
-  description,
-  specs,
-  image,
-  imageAlt,
-  caption,
-  flip = false,
-  imageStyle,
-}: {
-  label: string;
-  title: string;
-  description: string;
-  specs: Spec[];
-  image: string;
-  imageAlt: string;
-  caption: string;
-  flip?: boolean;
-  imageStyle?: React.CSSProperties;
-}) {
-  return (
-    <article className={`feature${flip ? ' flip' : ''}`}>
-      <figure className="media">
-        <img src={`/images/hardware/${image}`} alt={imageAlt} style={imageStyle} />
-        <figcaption className="label">{caption}</figcaption>
-      </figure>
-      <div className="copy">
-        <p className="label">{label}</p>
-        <h3 className="h2">{title}</h3>
-        <p className="muted">{description}</p>
-        <ul className="specs">
-          {specs.map((spec, i) => (
-            <li key={spec.title}>
-              <span className="idx">{'AB'[i]}</span>
-              <b>{spec.title}</b>
-              {spec.body && <p>{spec.body}</p>}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </article>
-  );
-}
+const subsurfaceIcons: IconName[] = ['chip', 'leaf', 'drop', 'grid', 'drop', 'roots'];
+const hubIcons: IconName[] = ['chip', 'wifi', 'shield', 'leaf', 'grid'];
+const kitIcons: IconName[] = ['wifi', 'roots', 'sun', 'chip', 'flask', 'drop'];
 
 export default function HardwarePage() {
-  const { hardware: t, common } = useTranslations();
+  const { hardware: t } = useTranslations();
+  const h = t.hero;
+  const n = useNumber();
+  const tick = useTick();
+  const fix = (v: number, d = 1) => n(+v.toFixed(d));
 
   return (
     <>
-      <header className="hero">
-        <div className="wrap">
-          <p className="label" style={{ marginBottom: 32 }}>{t.label}</p>
-          <div className="hero-grid">
-            <h1>
-              {t.title} <em>{t.titleEm}</em>
-            </h1>
-            <div className="hero-side">
-              <p className="lead">{t.subtitle}</p>
-              <div className="actions">
-                <a href="#ecosystem" className="btn btn-solid">{t.explore}</a>
-                <a href="#ecosystem" className="link">{t.specs} ↓</a>
-              </div>
+      <Scene
+        name="hub-pole"
+        title={h.title}
+        tag={h.tag}
+        cards={[
+          { icon: 'leaf', title: h.sensors[0], desc: h.sensors[1], extra: (
+            <div className="hs-read">
+              {[`${fix(wave(tick, 28, 1.4), 0)}%`, fix(wave(tick, 1.8, 0.06, 1)), `${fix(wave(tick, 24, 0.5, 2))}°C`, fix(wave(tick, 6.4, 0.05, 3))].map((v, i) => (
+                <span key={i}><b dir="ltr">{v}</b><small>{h.readings[i]}</small></span>
+              ))}
             </div>
-          </div>
-        </div>
-      </header>
+          ) },
+          { icon: 'drop', tint: 'water', title: h.irrigation[0], desc: h.irrigation[1], extra: (
+            <div className="hs-state"><span className="on">{h.active}</span><span>{h.zone}</span></div>
+          ) },
+          { icon: 'flask', title: h.injection[0], desc: h.injection[1], extra: (
+            <div className="hs-state"><span className="on">{h.running}</span><span>{h.dose}: <span dir="ltr">{fix(wave(tick, 2.1, 0.1))} L/h</span></span></div>
+          ) },
+          { icon: 'sun', tint: 'sun', title: h.weather[0], desc: h.weather[1], extra: (
+            <div className="hs-read">
+              {[`${fix(wave(tick, 24, 0.3), 0)}°C`, `${fix(wave(tick, 52, 1.5, 1), 0)}%`, `${fix(wave(tick, 12, 1, 2), 0)} km/h`, '0 mm'].map((v, i) => (
+                <span key={i}><b dir="ltr">{v}</b><small>{h.weatherReadings[i]}</small></span>
+              ))}
+            </div>
+          ) },
+          { icon: 'wifi', title: h.wireless[0], desc: h.wireless[1], extra: (
+            <div className="hs-state"><span dir="ltr">4G / LoRa</span><span className="on">{h.online}</span></div>
+          ) },
+        ]}
+      />
 
-      <figure className="plate wrap">
-        <img src="/images/hardware/hub.jpg" alt={t.imageAlt} style={{ objectPosition: 'center 60%' }} />
-        <figcaption>
-          <span className="label">{t.caption}</span>
-          <span className="label">{t.captionEnd}</span>
-        </figcaption>
-      </figure>
-
-      <section className="section" id="ecosystem" style={{ paddingBottom: 0, scrollMarginTop: 72 }}>
+      <section className="section">
         <div className="wrap">
-          <div className="head" style={{ marginBottom: 72 }}>
-            <p className="label">{t.ecosystem.label}</p>
-            <h2>{t.ecosystem.title}</h2>
+          <div className="head">
+            <p className="label">{t.kit.label}</p>
+            <h2>{t.kit.title} <em>{t.kit.titleEm}</em></h2>
+            <p className="lead">{t.kit.subtitle}</p>
           </div>
-
-          <Feature
-            label={t.hub.label}
-            title={t.hub.title}
-            description={t.hub.description}
-            specs={[
-              { title: t.hub.dosing, body: t.hub.dosingBody },
-              { title: t.hub.flow, body: t.hub.flowBody },
-            ]}
-            image="pole.jpg"
-            imageAlt={t.hub.imageAlt}
-            caption={t.hub.caption}
-            imageStyle={{ filter: 'grayscale(.6)' }}
-          />
-          <Feature
-            flip
-            label={t.injection.label}
-            title={t.injection.title}
-            description={t.injection.description}
-            specs={[{ title: t.injection.dosing }, { title: t.injection.pump }]}
-            image="tank.jpg"
-            imageAlt={t.injection.imageAlt}
-            caption={t.injection.caption}
-          />
-          <Feature
-            label={t.subsurface.label}
-            title={t.subsurface.title}
-            description={t.subsurface.description}
-            specs={[{ title: t.subsurface.sensing }, { title: t.subsurface.delivery }]}
-            image="schematic.jpg"
-            imageAlt={t.subsurface.imageAlt}
-            caption={t.subsurface.caption}
-          />
+          <div className="tiles three">
+            {t.kit.items.map(([title, desc], i) => (
+              <div key={title} className="tile">
+                <Icon name={kitIcons[i]} className="tile-ico" />
+                <b>{title}</b>
+                <p>{desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="cta">
+      <section className="section rule-top scene-head">
+        <div className="wrap head">
+          <p className="label">{t.subsurface.label}</p>
+          <h2>{t.subsurface.title} <em>{t.subsurface.titleEm}</em></h2>
+          <p className="lead">{t.subsurface.subtitle}</p>
+        </div>
+      </section>
+      <Scene
+        name="subsurface"
+        tag={[t.subsurface.label, `${t.subsurface.title} ${t.subsurface.titleEm}`]}
+        cards={t.subsurface.items.map(([title, desc], i) => ({ icon: subsurfaceIcons[i], tint: i === 2 || i === 4 ? 'water' : undefined, title, desc }))}
+      />
+
+      <section className="section scene-head">
+        <div className="wrap head">
+          <p className="label">{t.hub.label}</p>
+          <h2>{t.hub.title} <em>{t.hub.titleEm}</em></h2>
+          <p className="lead">{t.hub.subtitle}</p>
+        </div>
+      </section>
+      <Scene
+        name="hub-field"
+        tag={[t.hub.label, `${t.hub.title} ${t.hub.titleEm}`]}
+        cards={t.hub.items.map(([title, desc], i) => ({ icon: hubIcons[i], title, desc }))}
+      />
+
+      <section className="section">
         <div className="wrap">
-          <p className="label">{common.begin}</p>
-          <h2>
-            {t.cta.title} <em style={{ color: 'var(--sage)' }}>{t.cta.titleEm}</em>
-          </h2>
-          <div className="actions">
-            <a href="#" className="btn btn-solid">{common.getStarted}</a>
-            <a href="#" className="link">
-              {common.requestQuote} <span className="arrow">→</span>
-            </a>
+          <div className="head">
+            <p className="label">{t.controllers.label}</p>
+            <h2>{t.controllers.title} <em>{t.controllers.titleEm}</em></h2>
+            <p className="lead">{t.controllers.subtitle}</p>
           </div>
+          <div className="gallery">
+            {t.controllers.items.map(([title, desc], i) => (
+              <figure key={title}>
+                <img src={`/images/home/controller-${i + 1}.jpg`} alt={t.controllers.alts[i]} loading="lazy" />
+                <figcaption><b>{title}</b><p>{desc}</p></figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section rule-top">
+        <div className="wrap">
+          <div className="head">
+            <p className="label">{t.install.label}</p>
+            <h2>{t.install.title} <em>{t.install.titleEm}</em></h2>
+            <p className="lead">{t.install.subtitle}</p>
+          </div>
+          <Flow steps={t.install.steps} icons={['grid', 'chip', 'flask', 'leaf']} />
         </div>
       </section>
     </>
