@@ -7,6 +7,7 @@ export const translations = {
       getStarted: "Get started",
       requestQuote: "Request a quote",
       live: "Live",
+      loading: "Preparing the farm…",
     },
     nav: {
       tech: "Technology",
@@ -479,6 +480,7 @@ export const translations = {
       getStarted: "شروع کنید",
       requestQuote: "استعلام قیمت",
       live: "زنده",
+      loading: "در حال آماده‌سازی مزرعه…",
     },
     nav: {
       tech: "فناوری",

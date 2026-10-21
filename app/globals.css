@@ -481,15 +481,20 @@
 [dir="rtl"] .num, [dir="rtl"] .hs-big, [dir="rtl"] .live-grid b { font-weight: 600; }
 
 /* Splash (app/[locale]/layout.tsx): covers the page until it has loaded */
-#splash { position: fixed; inset: 0; z-index: 1000; display: grid; place-content: center; justify-items: center; gap: 28px; background: radial-gradient(ellipse at 50% 45%, #10261a, var(--canvas) 70%); transition: opacity .6s ease, visibility .6s; }
-#splash .logo { width: min(220px, 55vw); height: auto; animation: splash-breathe 2.2s ease-in-out infinite; }
-#splash i { position: relative; width: 160px; height: 2px; border-radius: 2px; overflow: hidden; background: rgb(255 255 255 / .1); }
-#splash i::after { content: ""; position: absolute; inset: 0; width: 40%; border-radius: 2px; background: var(--sage); box-shadow: 0 0 10px var(--sage); animation: splash-bar 1.3s ease-in-out infinite; }
+#splash { position: fixed; inset: 0; z-index: 1000; display: grid; place-content: center; justify-items: center; gap: 22px; background: radial-gradient(ellipse at 50% 45%, #10261a, var(--canvas) 70%); transition: opacity .6s ease, visibility .6s; }
+#splash .logo { width: min(160px, 42vw); height: auto; animation: splash-breathe 2.2s ease-in-out infinite; }
+.splash-quote { margin: 4px 0 0; max-width: 80vw; text-align: center; font: 500 clamp(17px, 2vw, 22px)/1.4 var(--serif); color: var(--text); opacity: .9; }
+.splash-quote::before { content: "“"; color: var(--sage); } .splash-quote::after { content: "”"; color: var(--sage); }
+[dir="rtl"] .splash-quote::before { content: "«"; } [dir="rtl"] .splash-quote::after { content: "»"; }
+.splash-progress { display: flex; flex-direction: column; gap: 10px; width: min(280px, 70vw); margin-top: 6px; }
+.splash-progress > i { position: relative; height: 4px; border-radius: 4px; overflow: hidden; background: rgb(255 255 255 / .1); }
+.splash-progress > i::after { content: ""; position: absolute; inset-block: 0; inset-inline-start: 0; width: calc(var(--p, 0) * 100%); border-radius: 4px; background: var(--sage); box-shadow: 0 0 10px var(--sage); transition: width .3s ease; }
+.splash-progress > span { display: flex; justify-content: space-between; gap: 12px; font: 400 13px/1 var(--sans); color: var(--text-2); }
+.splash-progress b { font-weight: 500; color: var(--sage); font-variant-numeric: tabular-nums; }
 @keyframes splash-breathe { 50% { opacity: .65; transform: scale(.97); } }
-@keyframes splash-bar { from { transform: translateX(-100%); } to { transform: translateX(260%); } }
 html[data-loaded] #splash { opacity: 0; visibility: hidden; pointer-events: none; }
 /* safety net if no script ever marks the page loaded: the splash leaves on its own after 10s */
 html:not([data-loaded]) #splash { animation: splash-timeout .6s ease 10s forwards; }
 @keyframes splash-timeout { to { opacity: 0; visibility: hidden; pointer-events: none; } }
-@media (prefers-reduced-motion: reduce) { #splash .logo, #splash i::after { animation: none; } }
+@media (prefers-reduced-motion: reduce) { #splash .logo { animation: none; } }
 
