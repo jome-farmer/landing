@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from '@/lib/use-translations';
 
-// Brand film: loads only when scrolled near, plays once (muted) when its section is in view and holds the
+// Brand film: preloads once the page is idle or the section is near, plays once (muted) when its section is in view and holds the
 // last frame; leaving pauses it, and coming back after it has finished plays it again from the start.
 // With reduced motion it shows the poster and native controls instead of autoplaying.
 export default function Film() {
@@ -19,16 +19,22 @@ export default function Film() {
       setStill(true); // eslint-disable-line react-hooks/set-state-in-effect
       return;
     }
+    // fetch the film ahead of time: once the page has loaded and is idle, or when it gets within ~1.5 screens
+    const warm = () => { if (v.readyState === 0 && v.preload !== 'auto') { v.preload = 'auto'; v.load(); } };
+    const idle = () => ('requestIdleCallback' in window ? requestIdleCallback(warm, { timeout: 3000 }) : setTimeout(warm, 1500));
+    if (document.readyState === 'complete') idle(); else addEventListener('load', idle, { once: true });
+    const near = new IntersectionObserver(([e]) => e.isIntersecting && warm(), { rootMargin: '0px 0px 150% 0px' });
+    near.observe(v);
     const io = new IntersectionObserver(([e]) => {
       if (e.isIntersecting) {
-        v.preload = 'auto';
+        warm();
         if (v.ended) v.currentTime = 0;
         v.play().catch(() => {});
       }
       else v.pause();
     }, { threshold: 0.35 });
     io.observe(v);
-    return () => io.disconnect();
+    return () => { io.disconnect(); near.disconnect(); removeEventListener('load', idle); };
   }, []);
 
   const toggle = () => {
