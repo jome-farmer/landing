@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from '@/lib/use-translations';
 
-// Brand film: loads only when scrolled near, plays muted while in view, pauses when it leaves.
+// Brand film: loads only when scrolled near, plays once (muted) when its section is in view and holds the
+// last frame; leaving pauses it, and coming back after it has finished plays it again from the start.
 // With reduced motion it shows the poster and native controls instead of autoplaying.
 export default function Film() {
   const t = useTranslations().home.film;
@@ -19,7 +20,11 @@ export default function Film() {
       return;
     }
     const io = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) { v.preload = 'auto'; v.play().catch(() => {}); }
+      if (e.isIntersecting) {
+        v.preload = 'auto';
+        if (v.ended) v.currentTime = 0;
+        v.play().catch(() => {});
+      }
       else v.pause();
     }, { threshold: 0.35 });
     io.observe(v);
@@ -31,7 +36,7 @@ export default function Film() {
     if (!v) return;
     v.muted = !muted;
     setMuted(!muted);
-    if (v.paused) v.play().catch(() => {});
+    if (v.paused && !v.ended) v.play().catch(() => {});
   };
 
   return (
@@ -43,7 +48,7 @@ export default function Film() {
           <p className="lead">{t.subtitle}</p>
         </div>
         <figure className="film-frame">
-          <video ref={video} src="/video/jome-film.mp4" poster="/video/jome-film.jpg" muted loop playsInline preload="none" controls={still} aria-label={`${t.title} ${t.titleEm}`} />
+          <video ref={video} src="/video/jome-film.mp4" poster="/video/jome-film.jpg" muted playsInline preload="none" controls={still} aria-label={`${t.title} ${t.titleEm}`} />
           {!still && (
             <button type="button" className="film-sound" onClick={toggle} aria-pressed={!muted}>
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
